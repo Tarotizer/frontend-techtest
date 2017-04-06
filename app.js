@@ -17,7 +17,7 @@ var app = shunter({
         localhost: {
             default: {
                 host: '127.0.0.1',
-                port: 5401
+                port: 5000 //changed from 5401 to backends default port
             }
         }
     }

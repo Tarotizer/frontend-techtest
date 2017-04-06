@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>Page Title: Home</title>
+        <link rel="stylesheet" href="{@assetPath src="style.css" /}"/>
     </head>
     <body>
         <header>
@@ -17,20 +18,74 @@
 
             <aside id="sidebar" class="sidebar" role="complementary">
                 <section class="social-media">
-                    <h1>Follow us</h1>
+                    <h1>{data.title}</h1>
                     <ul class="social-media__list">
+                        {#data.items}
+                            <li class="social-media__{.key}">
+                                <a href="{.link}" title="{.tip}">
+                                <span data-tooltip="{.tip}" class="social-media-icon">
+                                    <img src="{@assetPath src="{.key}_blue.svg" /}" alt="icon {.key}" title="icon {.key}">
+                                </span>
+                                {.text}</a>
+                                <!--
+                                ## COMMENT ON TEST
+                                    For usability reasons the icon should be in the link. This will cause CSS to
+                                    prevent the underlining of the icon when hovering the link. I kept it seperated
+                                    because it wasn't required in the tests README.md
+                                ## COMMENT ON TEST END
+                                -->
+                            </li>
+                        {/data.items}
+                    <!--
+UNUSED CODE FOR DOCUMENTATION AND EXPLANATION    TODO: remove before publication (not pull request of this test)
+                        ## COMMENT ON TEST
+                        Variant for non SVG supporting browsers not required in the task (IE9+ and latest others)
+                        ## COMMENT ON TEST END
+                        {#data.items}
+                            <li class="social-media__{.key}">
+                                <span data-tooltip="{.tip}">
+                                    <object type="image/svg-xml" data="{@assetPath src="{.key}.svg"/}" class="social-media-icon">
+                                        <img src="{@assetPath src="{.key}.png" /}" alt="icon {.key}" title="icon {.key}">&nbsp; --> <!-- fallback for browsers that doesn't support SVG -->
+                    <!--                </object>
+                                </span>
+                                <a href="{.link}" title="{.tip}">{.text}</a>
+
+                            </li>
+                        {/data.items}
+                    -->
+                    <!--
+                    ## COMMENT ON TEST
+                        Variant with high disadvantages in maintainance aund readability just kept to show a version where the svgs are inline in terms of beeing included by it's source code
+                        Using the source code of the svg prevents a iterative usage of dustjs.
+                        It's just kept for demonstration
+                    ## COMMENT ON TEST END
+
                         <li class="social-media__rss">
-                            <a href="http://www.example.com/feeds.html" title="RSS feed">RSS feed</a>
+                            <span class="social-media-icon" data-tooltip="{data.items[0].tip}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-14a2 2 0 0 1-2-2v-14a2 2 0 0 1 2-2m2.5 12a1.5 1.5 0 0 0-1.5 1.5 1.5 1.5 0 0 0 1.5 1.5 1.5 1.5 0 0 0 1.5-1.5 1.5 1.5 0 0 0-1.5-1.5m-1.5-5v2a6 6 0 0 1 6 6h2a8 8 0 0 0-8-8m0-4v2a10 10 0 0 1 10 10h2a12 12 0 0 0-12-12z"/></svg>
+                            </span>
+                            <a href="{data.items[0].link}" title="{data.items[0].tip}">{data.items[0].text}</a>
                         </li>
                         <li class="social-media__twitter">
-                            <a href="http://twitter.com/example" title="Follow us on Twitter">Follow us on Twitter</a>
+                            <span class="social-media-icon"  data-tooltip="{data.items[1].tip}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M17.71 9.33c-.07 4.62-3.02 7.78-7.43 7.98-1.82.08-3.13-.5-4.28-1.23 1.34.21 3-.32 3.9-1.08-1.32-.14-2.09-.81-2.46-1.88.38.06.78.04 1.14-.03-1.19-.4-2.04-1.14-2.08-2.68.33.16.68.3 1.14.33-.89-.51-1.54-2.36-.79-3.58 1.32 1.45 2.91 2.63 5.52 2.79-.66-2.8 3.05-4.32 4.6-2.45.66-.12 1.19-.36 1.71-.64-.21.64-.62 1.11-1.12 1.47.54-.07 1.03-.2 1.44-.41-.25.53-.81 1.01-1.29 1.41m2.29-7.33h-16a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-16c0-1.11-.9-2-2-2z"/></svg>
+                            </span>
+                            <a href="{data.items[1].link}" title="{data.items[1].tip}">{data.items[1].text}</a>
                         </li>
                         <li class="social-media__facebook">
-                            <a href="http://www.facebook.com/example" title="Follow us on Facebook">Follow us on Facebook</a>
+                            <span class="social-media-icon" data-tooltip="{data.items[2].tip}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 4v3h-2a1 1 0 0 0-1 1v2h3v3h-3v7h-3v-7h-2v-3h2v-2.5c0-1.94 1.57-3.5 3.5-3.5m3.5-2h-16a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-16c0-1.11-.9-2-2-2z"/></svg>
+                            </span>
+                            <a href="{data.items[2].link}" title="{data.items[2].tip}">{data.items[2].text}</a>
                         </li>
                         <li class="social-media__email">
-                            <a href="http://www.example.com/alerts/" title="E-alert sign up">E-alert sign up</a>
+                            <span class="social-media-icon" data-tooltip="{data.items[3].tip}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 4h-16a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-12a2 2 0 0 0-2-2m0 14h-16v-10l8 5 8-5v10m0-12l-8 5-8-5h16z"/></svg>
+                            </span>
+                            <a href="{data.items[3].link}" title="{data.items[3].tip}">{data.items[3].text}</a>
                         </li>
+UNUSED CODE END
+                    -->
                     </ul>
                 </section>
             </aside>

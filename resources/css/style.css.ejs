@@ -26,9 +26,15 @@ body {
     clear: both;
 }
 
+/* fill is no valid CSS
+simpliest sollution add the fill as style element of svg's source code
+other way change fill with javascript by manipulating svg.data
+
+I changed the color in the svg files for a neat an quick sollution and use this copy
+
 svg {
     fill: #1274d6;
-}
+} */
 
 a {
     color: #1274d6;
@@ -109,4 +115,35 @@ aside {
     font-size: 16px;
     line-height: 1.75;
     list-style-type: none
+}
+
+span.social-media-icon,
+object.social-media-icon {
+    position: relative;
+    top: 6px;
+}
+
+span {
+    position:relative;
+}
+
+span[data-tooltip]:before {
+    position: absolute;
+    left: 36px;
+    top: 20px;
+    background-color: #000000;
+    color: #ffffff;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 5px;
+    padding: 0 5px;
+    content: attr(data-tooltip);
+    white-space: nowrap;
+    font-size:90%;
+    display: none;
+}
+
+span[data-tooltip]:hover:after,
+span[data-tooltip]:hover:before {
+display: block;
 }
